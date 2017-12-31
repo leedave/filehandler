@@ -1,0 +1,43 @@
+{
+    "name": "leedch/filehandler",
+    "type": "library",
+    "description": "PHP Classes that are designed to simplify the handling of files and folders",
+    "keywords": [
+        "leedch",
+        "files",
+        "folders",
+        "phpunit"
+    ],
+    "homepage": "https://github.com/leedave/filehandler.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Lee",
+            "email": "leed@leed.ch",
+            "homepage": "https://www.leed.ch/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7.0",
+        "phpunit/phpunit": "^6.5"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Leedch\\Filehandler\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Leedch\\Filehandler\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
