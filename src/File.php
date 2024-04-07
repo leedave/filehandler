@@ -7,7 +7,7 @@ use Leedch\Filehandler\Folder;
 /**
  * Folders are simpler types of files
  * Here I add additional methods designed specifically for files
- * 
+ *
  * @author leed
  */
 class File extends Folder
@@ -17,7 +17,7 @@ class File extends Folder
      * @param string $fullPath
      * @return string
      */
-    public static function saveFile(string $fullPath, string $content)
+    public static function saveFile(string $fullPath, string $content): string
     {
         if (file_exists($fullPath)) {
             $arrFilePath = explode(DIRECTORY_SEPARATOR, $fullPath);
@@ -33,13 +33,13 @@ class File extends Folder
         chmod($fullPath, 0775);
         return $fullPath;
     }
-    
+
     /**
      * Puts a number on the end of a file name, prevents overwriting
      * @param string $fileName
      * @return string
      */
-    protected static function iterateFileName(string $fileName)
+    protected static function iterateFileName(string $fileName): string
     {
         //First remove Extension
         $arrFileParts = explode(".", $fileName);

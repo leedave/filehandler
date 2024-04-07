@@ -14,7 +14,7 @@ class Folder
      * @param string $path
      * @return string
      */
-    public static function getFolder(string $path)
+    public static function getFolder(string $path): string
     {
         $arrFolders = explode(DIRECTORY_SEPARATOR, $path);
         $fullPath = "";
