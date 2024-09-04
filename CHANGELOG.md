@@ -1,22 +1,19 @@
 # Changelog #
 
-All Notable changes to `leech/filehandler` will be documented in this file.
-
-Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
-
-## [1.0.0] - 2017-12-31 ##
+## [2.0.0] - 2024-09-04 ##
 
 ### Added ###
-- Initial Release
+- New major release, totally new structure. 
+- Now also has a class for images
 
 ### Deprecated ###
-- Nothing
+- All previous usage
 
 ### Fixed ###
 - Nothing
 
 ### Removed ###
-- Nothing
+- Everything previously used
 
 ### Security ###
 - Nothing

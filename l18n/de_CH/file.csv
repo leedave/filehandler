@@ -1,0 +1,3 @@
+"error.image.notSaved.invalidFormat","Bild nicht gespeichert, ungültiges Bildformat"
+"error.image.notSaved.fileNotFound","Bild nicht gespeichert, datei nicht gefunden"
+"error.image.notSaved.saveError","Bild nicht gespeichert, unbekannter Fehler im Speichervorgang"

@@ -2,57 +2,72 @@
 
 namespace Leedch\Filehandler;
 
-use Leedch\Filehandler\Folder;
-
 /**
- * Folders are simpler types of files
- * Here I add additional methods designed specifically for files
- *
+ * General File handling, also used for uploads
  * @author leed
  */
-class File extends Folder
+abstract class File
 {
-    /**
-     * Saves a File and returns $fullPath , use to prevent duplicate names
-     * @param string $fullPath
-     * @return string
-     */
-    public static function saveFile(string $fullPath, string $content): string
+    protected $storageDirectory;
+    protected $webFolder;
+    protected $adminFolder;
+
+    public abstract function initFile();
+
+    protected function createItemFolders()
     {
-        if (file_exists($fullPath)) {
-            $arrFilePath = explode(DIRECTORY_SEPARATOR, $fullPath);
-            $fileName = array_pop($arrFilePath);
-            $newFileName = self::iterateFileName($fileName);
-            $arrFilePath[] = $newFileName;
-            $newFullPath = implode(DIRECTORY_SEPARATOR, $arrFilePath);
-            return self::saveFile($newFullPath, $content);
+        static::createFolderIfNotExists($this->storageDirectory);
+        static::createFolderIfNotExists($this->webFolder);
+        static::createFolderIfNotExists($this->adminFolder);
+    }
+
+    public static function createFolderIfNotExists(string $folderPath)
+    {
+        if (file_exists($folderPath) && is_dir($folderPath)) {
+            return;
         }
-        $file = fopen($fullPath, "w");
-        fputs($file, $content);
-        fclose($file);
-        chmod($fullPath, 0775);
-        return $fullPath;
+        if (substr((string) $folderPath, 0, 1) === "/") {
+            $folderPath = substr((string) $folderPath, 1);
+        }
+        $arrPath = explode("/", $folderPath);
+        $bottomLevel = array_pop($arrPath);
+        $parentPath = implode("/", $arrPath);
+        if ($parentPath !== "") {
+            static::createFolderIfNotExists("/".$parentPath);
+        }
+        mkdir("/".$parentPath . "/" .$bottomLevel);
     }
 
     /**
-     * Puts a number on the end of a file name, prevents overwriting
-     * @param string $fileName
+     * Prevent files from being overwritten. Checks for existing files, if the
+     * name is taken, a new name is returned
+     * @param string $requestedPath
      * @return string
      */
-    protected static function iterateFileName(string $fileName): string
+    protected static function getSaveName(string $requestedPath): string
     {
-        //First remove Extension
-        $arrFileParts = explode(".", $fileName);
-        $extension = array_pop($arrFileParts);
-        $tempFileName = implode(".", $arrFileParts);
-        $arrFileName = explode("_", $tempFileName);
-        if (is_numeric($arrFileName[(count($arrFileName) - 1)])) {
-            $iterator = (int) array_pop($arrFileName);
-            $iterator++;
-            $arrFileName[] = $iterator;
-            $newFileName = implode("_", $arrFileName);
-            return $newFileName . "." . $extension;
+        if (!file_exists($requestedPath)) {
+            return $requestedPath;
         }
-        return $tempFileName."_1." . $extension;
+        $arrFolders = explode("/", $requestedPath);
+        $fileName = array_pop($arrFolders);
+        $folder = implode("/", $arrFolders);
+        $arrFileName = explode(".", $fileName);
+        $suffix = array_pop($arrFileName);
+        $fileNameWithoutSuffix = implode(".", $arrFileName);
+        for ($i = 1;$i < 1000;$i++) {
+            $fileNameSuggestion = $fileNameWithoutSuffix."_".$i.".".$suffix;
+            if (!file_exists($folder . "/" . $fileNameSuggestion)) {
+                break;
+            }
+        }
+        return $folder . "/" . $fileNameSuggestion;
+    }
+
+    public static function replaceFilePath(string $source, string $webFolder): string
+    {
+        $arrSource = explode("/", $source);
+        $fileName = array_pop($arrSource);
+        return $webFolder . "/" . $fileName;
     }
 }

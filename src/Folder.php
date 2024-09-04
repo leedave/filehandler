@@ -2,33 +2,16 @@
 
 namespace Leedch\Filehandler;
 
+use Leedch\Filehandler\File;
+
 /**
- * Folder operations
- *
+ * Basic folder features
  * @author leed
  */
-class Folder
+class Folder extends File
 {
-    /**
-     * Returns $path if folder exists, creates it if not
-     * @param string $path
-     * @return string
-     */
-    public static function getFolder(string $path): string
+    public function initFile()
     {
-        $arrFolders = explode(DIRECTORY_SEPARATOR, $path);
-        $fullPath = "";
-        if ($arrFolders[0] !== "") {
-            $fullPath = $arrFolders[0];
-        }
-        unset($arrFolders[0]);
-        foreach ($arrFolders as $folder) {
-            $fullPath .= DIRECTORY_SEPARATOR . $folder;
-            if (file_exists($fullPath) && is_dir($fullPath)) {
-                continue;
-            }
-            mkdir($fullPath, 0775);
-        }
-        return $path;
+        // Do nothing, exception to regular use where class represents a file
     }
 }

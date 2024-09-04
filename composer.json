@@ -19,23 +19,14 @@
         }
     ],
     "require": {
-        "php": "~8.0|~8.1|~8.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.5"
+        "php": "~8.0|~8.1|~8.2|~8.3",
+        "leedch/message": "^1.0",
+        "leedch/translate": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "Leedch\\Filehandler\\": "src"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Leedch\\Filehandler\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "phpunit"
     },
     "config": {
         "sort-packages": true

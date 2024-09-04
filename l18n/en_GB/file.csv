@@ -1,0 +1,3 @@
+"error.image.notSaved.invalidFormat","Image not saved, invalid format"
+"error.image.notSaved.fileNotFound","Image not saved, file not found"
+"error.image.notSaved.saveError","Image not saved, error in save process"
