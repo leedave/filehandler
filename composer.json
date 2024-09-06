@@ -21,7 +21,8 @@
     "require": {
         "php": "~8.0|~8.1|~8.2|~8.3",
         "leedch/message": "^1.0",
-        "leedch/translate": "^1.0"
+        "leedch/translate": "^1.0",
+        "chillerlan/php-qrcode": "^4.3"
     },
     "autoload": {
         "psr-4": {
