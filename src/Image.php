@@ -1,9 +1,9 @@
 <?php
 
-namespace Leedch\Leedch\Core\File;
+namespace Leedch\Filehandler;
 
 use Exception;
-use Leedch\Leedch\Core\File\File;
+use Leedch\Filehandler\File;
 use Leedch\Message\Message;
 use Leedch\Translate\Translate as T;
 
